@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContaSegura Suporte - Recuperação de Contas</title>
+    <meta name="description" content="Ajudamos você a recuperar o acesso às suas contas de Instagram e Gmail com segurança, sem solicitar senhas atuais.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0f172a",
+                        secondary: "#1e293b",
+                        accent: "#3b82f6",
+                        success: "#10b981",
+                        glass: "rgba(255, 255, 255, 0.1)"
+                    },
+                    backdropBlur: {
+                        'glass': '10px'
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e40af 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="min-h-screen gradient-bg text-white font-sans">
+    <!-- Header/Navigation -->
+    <header class="sticky top-0 z-50 glass-effect">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shield-alt text-accent text-2xl"></i>
+                    <h1 class="text-2xl font-bold">ContaSegura <span class="gradient-text">Suporte</span></h1>
+                </div>
+                <button id="admin-btn" class="px-4 py-2 bg-secondary hover:bg-accent rounded-lg transition-all duration-300">
+                    <i class="fas fa-user-shield mr-2"></i>Área Admin
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="text-center mb-12">
+            <div class="glass-effect rounded-2xl p-8 md:p-12 max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Recupere o acesso às suas contas com <span class="gradient-text">segurança</span></h2>
+                <p class="text-xl text-gray-300 mb-8">Ajudamos você a recuperar o acesso às suas contas de Instagram e Gmail sem nunca solicitar informações sensíveis como senha atual.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-success mr-2"></i>
+                        <span>100% Seguro</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-clock text-accent mr-2"></i>
+                        <span>Suporte 24/7</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-lock text-success mr-2"></i>
+                        <span>Sem pedir senhas atuais</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section class="mb-16">
+            <div class="glass-effect rounded-2xl p-6 md:p-8 max-w-2xl mx-auto">
+                <h3 class="text-2xl font-bold mb-6 text-center">Solicitar Ajuda</h3>
+                <form id="support-form" class="space-y-6">
+                    <!-- Name Field -->
+                    <div>
+                        <label for="name" class="block mb-2 font-medium">Nome completo *</label>
+                        <input type="text" id="name" required 
+                               class="w-full px-4 py-3 bg-secondary border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent transition-all">
+                    </div>
+
+                    <!-- Email Field -->
+                    <div>
+                        <label for="email" class="block mb-2 font-medium">Email vinculado à conta *</label>
+                        <input type="email" id="email" required 
+                               class="w-full px-4 py-3 bg-secondary border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent transition-all">
+                    </div>
+
+                    <!-- Account Type -->
+                    <div>
+                        <label for="account-type" class="block mb-2 font-medium">Tipo de conta *</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="relative">
+                                <input type="radio" id="instagram" name="account-type" value="Instagram" required class="hidden peer">
+                                <label for="instagram" class="flex items-center justify-center p-4 bg-secondary border border-gray-700 rounded-lg cursor-pointer peer-checked:border-accent peer-checked:bg-accent/10 transition-all">
+                                    <i class="fab fa-instagram text-2xl mr-3"></i>
+                                    <span>Instagram</span>
+                                </label>
+                            </div>
+                            <div class="relative">
+                                <input type="radio" id="gmail" name="account-type" value="Gmail" required class="hidden peer">
+                                <label for="gmail" class="flex items-center justify-center p-4 bg-secondary border border-gray-700 rounded-lg cursor-pointer peer-checked:border-accent peer-checked:bg-accent/10 transition-all">
+                                    <i class="fab fa-google text-2xl mr-3"></i>
+                                    <span>Gmail</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Problem Description -->
+                    <div>
+                        <label for="problem" class="block mb-2 font-medium">Descrição do problema *</label>
+                        <textarea id="problem" rows="4" required 
+                                  class="w-full px-4 py-3 bg-secondary border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent transition-all"></textarea>
+                    </div>
+
+                    <!-- Date Field -->
+                    <div>
+                        <label for="date" class="block mb-2 font-medium">Data aproximada de perda de acesso *</label>
+                        <input type="date" id="date" required 
+                               class="w-full px-4 py-3 bg-secondary border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent transition-all">
+                    </div>
+
+                    <!-- Optional Password Fields -->
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-medium text-gray-300">Informações opcionais (para ajudar na recuperação):</h4>
+                        
+                        <div>
+                            <label for="old-password" class="block mb-2">Senha mais usada naquela época (opcional)</label>
+                            <input type="password" id="old-password" 
+                                   class="w-full px-4 py-3 bg-secondary border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent transition-all">
+                        </div>
+
+                        <div>
+                            <label for="current-password" class="block mb-2">Senha mais usada atualmente - Gmail (opcional)</label>
+                            <input type="password" id="current-password" 
+                                   class="w-full px-4 py-3 bg-secondary border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                        <button type="submit" 
+                                class="w-full py-4 bg-gradient-to-r from-accent to-success text-white font-bold rounded-lg hover:opacity-90 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-paper-plane mr-3"></i>
+                            Enviar Solicitação
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Success Message (Hidden by default) -->
+        <div id="success-message" class="hidden glass-effect rounded-2xl p-8 max-w-2xl mx-auto text-center">
+            <i class="fas fa-check-circle text-success text-5xl mb-6"></i>
+            <h3 class="text-2xl font-bold mb-4">Solicitação Recebida!</h3>
+            <p class="text-xl">Sua solicitação foi recebida com sucesso. Em até 5 dias entraremos em contato.</p>
+            <button id="new-request" class="mt-6 px-6 py-3 bg-accent rounded-lg hover:opacity-90 transition-all">
+                Nova Solicitação
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-effect mt-12">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-shield-alt text-accent text-2xl"></i>
+                        <h2 class="text-xl font-bold">ContaSegura Suporte</h2>
+                    </div>
+                    <p class="text-gray-400">Recuperação segura de contas desde 2023</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-gray-400 mb-2">
+                        <i class="fas fa-envelope mr-2"></i>suporte@contasegura.com
+                    </p>
+                    <p class="text-gray-400">
+                        <i class="fas fa-phone mr-2"></i>(11) 99999-9999
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2023 ContaSegura Suporte. Todos os direitos reservados.</p>
+                <p class="mt-2 text-sm">Nunca solicitamos senhas atuais. Sua segurança é nossa prioridade.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+        <div class="glass-effect rounded-2xl p-6 md:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div id="login-screen">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="text-2xl font-bold">Área Administrativa</h3>
+                    <button id="close-admin" class="p-2 hover:bg-secondary rounded-lg">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="mb-8">
+                    <h4 class="text-lg font-medium mb-4">Login de Administrador</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="admin-user" class="block mb-2">Usuário</label>
+                            <input type="text" id="admin-user" 
+                                   class="w-full px-4 py-3 bg-secondary border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent">
+                        </div>
+                        <div>
+                            <label for="admin-pass" class="block mb-2">Senha</label>
+                            <input type="password" id="admin-pass" 
+                                   class="w-full px-4 py-3 bg-secondary border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent">
+                        </div>
+                        <button id="login-btn" class="w-full py-3 bg-accent rounded-lg hover:opacity-90 transition-all">
+                            Entrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="admin-dashboard" class="hidden">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="text-2xl font-bold">Painel de Solicitações</h3>
+                    <div class="flex space-x-4">
+                        <button id="logout-btn" class="px-4 py-2 bg-secondary rounded-lg hover:opacity-90">
+                            Sair
+                        </button>
+                        <button id="close-dashboard" class="p-2 hover:bg-secondary rounded-lg">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex flex-wrap gap-4 mb-4">
+                        <div class="px-4 py-2 bg-secondary rounded-lg">
+                            <span class="text-gray-400">Total: </span>
+                            <span id="total-requests" class="font-bold">0</span>
+                        </div>
+                        <div class="px-4 py-2 bg-secondary rounded-lg">
+                            <span class="text-gray-400">Instagram: </span>
+                            <span id="instagram-count" class="font-bold">0</span>
+                        </div>
+                        <div class="px-4 py-2 bg-secondary rounded-lg">
+                            <span class="text-gray-400">Gmail: </span>
+                            <span id="gmail-count" class="font-bold">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="py-3 px-4 text-left">Nome</th>
+                                <th class="py-3 px-4 text-left">Tipo</th>
+                                <th class="py-3 px-4 text-left">Problema</th>
+                                <th class="py-3 px-4 text-left">Data de Envio</th>
+                                <th class="py-3 px-4 text-left">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="requests-table">
+                            <!-- Requests will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="no-requests" class="text-center py-12 text-gray-500">
+                    <i class="fas fa-inbox text-4xl mb-4"></i>
+                    <p>Nenhuma solicitação encontrada</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data layer
+        const supportRequests = JSON.parse(localStorage.getItem('contaSeguraRequests')) || [];
+        
+        // Security: Hash passwords for storage
+        function hashPassword(password) {
+            if (!password) return '';
+            // Simple hash for demonstration - in production use stronger hashing
+            return btoa(password).split('').reverse().join('');
+        }
+
+        // Render functions
+        function renderRequestsTable(requests) {
+            if (requests.length === 0) {
+                document.getElementById('no-requests').classList.remove('hidden');
+                return '';
+            }
+            
+            document.getElementById('no-requests').classList.add('hidden');
+            return requests.map((request, index) => `
+                <tr class="border-b border-gray-800 hover:bg-secondary/50 transition-colors">
+                    <td class="py-3 px-4">${request.name}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-3 py-1 rounded-full text-sm ${request.accountType === 'Instagram' ? 'bg-purple-900/30 text-purple-300' : 'bg-blue-900/30 text-blue-300'}">
+                            ${request.accountType}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 max-w-xs truncate" title="${request.problem}">${request.problem.substring(0, 50)}${request.problem.length > 50 ? '...' : ''}</td>
+                    <td class="py-3 px-4">${new Date(request.submissionDate).toLocaleDateString('pt-BR')}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-3 py-1 rounded-full text-sm ${request.status === 'pendente' ? 'bg-yellow-900/30 text-yellow-300' : 'bg-green-900/30 text-green-300'}">
+                            ${request.status}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderStats(requests) {
+            const total = requests.length;
+            const instagramCount = requests.filter(r => r.accountType === 'Instagram').length;
+            const gmailCount = requests.filter(r => r.accountType === 'Gmail').length;
+            
+            document.getElementById('total-requests').textContent = total;
+            document.getElementById('instagram-count').textContent = instagramCount;
+            document.getElementById('gmail-count').textContent = gmailCount;
+        }
+
+        function renderAdminDashboard() {
+            const tableBody = document.getElementById('requests-table');
+            tableBody.innerHTML = renderRequestsTable(supportRequests);
+            renderStats(supportRequests);
+        }
+
+        // Form handling
+        document.getElementById('support-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const accountType = document.querySelector('input[name="account-type"]:checked').value;
+            const problem = document.getElementById('problem').value.trim();
+            const date = document.getElementById('date').value;
+            const oldPassword = document.getElementById('old-password').value;
+            const currentPassword = document.getElementById('current-password').value;
+            
+            // Validation
+            if (!name || !email || !accountType || !problem || !date) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+            
+            // Create request object
+            const request = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                accountType: accountType,
+                problem: problem,
+                lossDate: date,
+                oldPasswordHash: hashPassword(oldPassword),
+                currentPasswordHash: hashPassword(currentPassword),
+                submissionDate: new Date().toISOString(),
+                status: 'pendente'
+            };
+            
+            // Add to storage
+            supportRequests.unshift(request);
+            localStorage.setItem('contaSeguraRequests', JSON.stringify(supportRequests));
+            
+            // Show success message
+            document.getElementById('support-form').classList.add('hidden');
+            document.getElementById('success-message').classList.remove('hidden');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Admin functionality
+        document.getElementById('admin-btn').addEventListener('click', () => {
+            document.getElementById('admin-modal').classList.remove('hidden');
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.getElementById('admin-user').value = '';
+            document.getElementById('admin-pass').value = '';
+        });
+
+        document.getElementById('close-admin').addEventListener('click', () => {
+            document.getElementById('admin-modal').classList.add('hidden');
+        });
+
+        document.getElementById('close-dashboard').addEventListener('click', () => {
+            document.getElementById('admin-modal').classList.add('hidden');
+        });
+
+        document.getElementById('login-btn').addEventListener('click', () => {
+            const user = document.getElementById('admin-user').value;
+            const pass = document.getElementById('admin-pass').value;
+            
+            if (user === 'wallace' && pass === '3252') {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                renderAdminDashboard();
+            } else {
+                alert('Usuário ou senha incorretos!');
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('admin-user').value = '';
+            document.getElementById('admin-pass').value = '';
+        });
+
+        // New request button
+        document.getElementById('new-request').addEventListener('click', () => {
+            document.getElementById('success-message').classList.add('hidden');
+            document.getElementById('support-form').classList.remove('hidden');
+        });
+
+        // Initialize date field with today's date
+        document.getElementById('date').valueAsDate = new Date();
+
+        // Security warning for password fields
+        const passwordFields = document.querySelectorAll('input[type="password"]');
+        passwordFields.forEach(field => {
+            field.addEventListener('focus', () => {
+                field.parentElement.insertAdjacentHTML('beforeend', 
+                    '<p class="text-sm text-yellow-400 mt-1"><i class="fas fa-exclamation-triangle mr-1"></i>Esta informação é opcional e será armazenada com segurança</p>');
+            });
+            
+            field.addEventListener('blur', () => {
+                const warning = field.parentElement.querySelector('.text-yellow-400');
+                if (warning) warning.remove();
+            });
+        });
+
+        // Prevent navigation for anchor tags
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
+                e.preventDefault();
+            }
+        });
+
+        // Initialize stats if there are existing requests
+        if (supportRequests.length > 0) {
+            renderStats(supportRequests);
+        }
+    </script>
+</body>
+</html>
